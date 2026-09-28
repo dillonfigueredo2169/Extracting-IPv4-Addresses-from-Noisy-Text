@@ -47,20 +47,26 @@ Decisions the spec left open:
 
 The final program compiles with `g++ -std=c++17 -Wall -Wextra` with no warnings and passes all 39 cases in `tests.txt`, including every line of the sample run from the handout. The cases cover the octet and port limits, leading zeros, empty octets and ports, extra colons and periods, too many or too few octets, very long digit runs, garbage on both sides of an address, and finding a valid address after an invalid one. It also works with Windows line endings, as described above.
 
-### My own test case
+### My own test cases
 
-I added this test myself (it's at the bottom of `tests.txt`):
+I added these two tests myself (they're at the bottom of `tests.txt`).
 
 `ip is 1.2.5.6.8000`
 
-This checks what happens when someone writes a port with a period instead of a colon. It could look like address `1.2.5.6` with port `8000`, but the grammar only allows a colon before the port, and `1.2.5.6.8000` is one run with five parts. The whole run has to be rejected, not cut down to `1.2.5.6`. The program correctly printed `Invalid input: no valid IPv4 address found`. All 40 tests now pass.
+This checks what happens when someone writes a port with a period instead of a colon. It could look like address `1.2.5.6` with port `8000`, but the grammar only allows a colon before the port, and `1.2.5.6.8000` is one run with five parts. The whole run has to be rejected, not cut down to `1.2.5.6`. The program correctly printed `Invalid input: no valid IPv4 address found`.
+
+`ip is 168.20.2900`
+
+This checks an address that is broken in two ways at once. It only has three parts instead of four, and the last part, `2900`, has four digits and is over 255. The program correctly rejected it with `Invalid input: no valid IPv4 address found`.
+
+With both of my tests added, all 41 tests pass.
 
 ## Known limitations
 
-- All but one of the test cases were written by the same AI that wrote the code, so they mostly check the AI's reading of the spec. A case it did not think of would not be caught.
+- All but two of the test cases were written by the same AI that wrote the code, so they mostly check the AI's reading of the spec. A case it did not think of would not be caught.
 - `END` with extra spaces around it does not quit the program.
 - Only the first valid address on a line is reported.
 
 ## Verification statement
 
-I have gone over the final code and understand every line of it. It was tested against all 40 cases in `tests.txt` and works as intended. The known limitations are listed above.
+I have gone over the final code and understand every line of it. It was tested against all 41 cases in `tests.txt` and works as intended. The known limitations are listed above.
