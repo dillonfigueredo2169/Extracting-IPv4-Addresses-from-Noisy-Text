@@ -52,3 +52,7 @@ The final program compiles with `g++ -std=c++17 -Wall -Wextra` with no warnings 
 - The test cases were written by the same AI that wrote the code, so they only check the AI's reading of the spec. A case it did not think of would not be caught.
 - `END` with extra spaces around it does not quit the program.
 - Only the first valid address on a line is reported.
+
+## Verification statement
+
+I have gone over the final code and understand every line of it. It was tested against all 39 cases in `tests.txt` and works as intended. The known limitations are listed above.
